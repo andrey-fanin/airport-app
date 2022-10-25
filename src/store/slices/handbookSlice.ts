@@ -19,7 +19,11 @@ const initialState: HandbookState = {
   types: [],
 };
 
-interface handbookPayload {}
+interface HandbookPayload {
+  types: IAirportType[];
+  countries: IAirportCountry[];
+  regions: IAirportRegion[];
+}
 
 export const handbookSlice = createSlice({
   name: "handbook",
@@ -28,8 +32,11 @@ export const handbookSlice = createSlice({
     fetching(state) {
       state.loading = true;
     },
-    fetchSuccess(state, action: PayloadAction) {
+    fetchSuccess(state, action: PayloadAction<HandbookPayload>) {
       state.loading = false;
+      state.types = action.payload.types;
+      state.regions = action.payload.regions;
+      state.countries = action.payload.countries;
     },
     fetchError(state, action: PayloadAction<Error>) {
       state.loading = false;

@@ -13,7 +13,6 @@ export const fetchAirports = (_page = 1, _limit = 50) => {
           _page,
         },
       });
-      console.log(response);
       dispatch(
         airportSlice.actions.fetchSuccess({
           airports: response.data,

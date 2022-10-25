@@ -1,22 +1,29 @@
 import { AppDispatch } from "../index";
-import { airportSlice } from "../slices/airportSlice";
 import { handbookSlice } from "../slices/handbookSlice";
 import axios from "../../axios";
+import {
+  IAirportCountry,
+  IAirportRegion,
+  IAirportType,
+} from "../../models/models";
 
 export const fetchHandbooks = () => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(handbookSlice.actions.fetching());
-      const data = await Promise.all([axios.get("")]);
+      const response = await Promise.all([
+        axios.get<IAirportType[]>("types"),
+        axios.get<IAirportRegion[]>("regions"),
+        axios.get<IAirportCountry[]>("countries"),
+      ]);
 
       dispatch(
-        airportSlice.actions.fetchSuccess({
-          airports: response.data,
-          count: 88,
+        handbookSlice.actions.fetchSuccess({
+          types: response[0].data,
+          regions: response[1].data,
+          countries: response[2].data,
         })
       );
-    } catch (e) {
-      dispatch(airportSlice.actions.fetchError(e as Error));
-    }
+    } catch (e) {}
   };
 };

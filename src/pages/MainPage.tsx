@@ -26,7 +26,7 @@ const MainPage = () => {
   }, [dispatch, page]);
 
   return (
-    <div className="container mx-auto max-w-[760px] pt-5">
+    <div className="container mx-auto max-w-[760px] pt-5 mb-5">
       <AirportSearch />
 
       <AirportFilter />
@@ -38,20 +38,22 @@ const MainPage = () => {
         <AirportCard key={airport.id} airport={airport} />
       ))}
 
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={pageChangeHandler}
-        pageRangeDisplayed={3}
-        pageCount={pageCount}
-        previousLabel="<"
-        forcePage={page.current - 1}
-        containerClassName="flex justify-center"
-        pageClassName="py-1 px-2 border mr-2"
-        previousClassName="py-1 px-2 border mr-2"
-        nextClassName="py-1 px-2 border"
-        activeClassName="bg-gray-500 text-white"
-      />
+      {pageCount && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={pageChangeHandler}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="<"
+          forcePage={page.current - 1}
+          containerClassName="flex justify-center"
+          pageClassName="py-1 px-2 border mr-2"
+          previousClassName="py-1 px-2 border mr-2"
+          nextClassName="py-1 px-2 border"
+          activeClassName="bg-gray-500 text-white"
+        />
+      )}
     </div>
   );
 };
