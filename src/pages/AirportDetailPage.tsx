@@ -8,14 +8,16 @@ const AirportDetailPage = () => {
   const [airport, setAirport] = useState<IAirportDetail | null>(null);
   const [loading, setLoading] = useState(true);
 
-  async function fetchDetailAirport() {
-    const response = await axios.get<IAirportDetail>(`/airports/${params.id}`);
-    setAirport(response.data);
-    setLoading(false);
-  }
   useEffect(() => {
+    async function fetchDetailAirport() {
+      const response = await axios.get<IAirportDetail>(
+        `/airports/${params.id}`
+      );
+      setAirport(response.data);
+      setLoading(false);
+    }
     fetchDetailAirport();
-  }, []);
+  }, [params.id]);
 
   if (loading) return <p className="text-center">Loading...</p>;
 

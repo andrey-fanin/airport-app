@@ -11,7 +11,7 @@ function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchHandbooks());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Navigation />

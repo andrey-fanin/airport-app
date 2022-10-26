@@ -18,8 +18,6 @@ const AirportFilter = () => {
     setFilter((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const isFilterActive = () => filter.type || filter.region || filter.country;
-
   const clearFilter = () => {
     setFilter({
       type: "",
@@ -28,13 +26,14 @@ const AirportFilter = () => {
     });
   };
   useEffect(() => {
+    const isFilterActive = () => filter.type || filter.region || filter.country;
     if (isFilterActive()) {
       setHasFilter(true);
     } else {
       setHasFilter(false);
     }
     dispatch(airportSlice.actions.filter(filter));
-  }, [filter]);
+  }, [filter, dispatch]);
 
   if (loading) return <p className="text-center">Loading...</p>;
 

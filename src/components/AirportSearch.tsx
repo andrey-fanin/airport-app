@@ -12,14 +12,13 @@ const AirportSearch = () => {
   const [airports, setAirports] = useState<IAirport[]>([]);
   const [dropdown, setDropdown] = useState(false);
 
-  async function searchAirports() {
-    const response = await axios.get<IAirport[]>("airports", {
-      params: { q: debounced },
-    });
-    setAirports(response.data);
-  }
-
   useEffect(() => {
+    async function searchAirports() {
+      const response = await axios.get<IAirport[]>("airports", {
+        params: { q: debounced },
+      });
+      setAirports(response.data);
+    }
     if (debounced.length > 3) {
       searchAirports().then(() => setDropdown(true));
     } else {

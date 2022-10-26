@@ -20,7 +20,7 @@ const Navigation = () => {
       {isAuth && (
         <>
           <span className="font-bold">{username}</span>
-          <a href="#" onClick={logoutHandler}>
+          <a href="/" onClick={logoutHandler}>
             Logout
           </a>
         </>

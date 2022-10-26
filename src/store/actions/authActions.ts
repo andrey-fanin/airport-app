@@ -38,8 +38,8 @@ export const login = (data: AuthData) => {
           access: response.data.access,
         })
       );
-    } catch (e) {
-      throw e as Error;
+    } catch (e: any) {
+      throw new Error(e);
     }
   };
 };
